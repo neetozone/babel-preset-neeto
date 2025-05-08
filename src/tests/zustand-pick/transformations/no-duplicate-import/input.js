@@ -1,2 +1,2 @@
-import { shallow } from "zustand/shallow";
+import { useShallow } from "zustand/shallow";
 const { order, customer } = useGlobalStore.pick();

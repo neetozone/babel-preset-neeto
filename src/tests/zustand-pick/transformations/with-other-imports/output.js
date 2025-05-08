@@ -1,10 +1,9 @@
-import { shallow } from "zustand/shallow";
+import { useShallow } from "zustand/shallow";
 import React from "react";
 import { sample } from "somewhere";
 const { order, customer } = useGlobalStore(
-  store => ({
+  useShallow(store => ({
     order: store["order"],
     customer: store["customer"],
-  }),
-  shallow
+  }))
 );

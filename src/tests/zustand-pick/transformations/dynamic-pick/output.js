@@ -1,7 +1,6 @@
-import { shallow } from "zustand/shallow";
+import { useShallow } from "zustand/shallow";
 const { customer } = useGlobalStore(
-  store => ({
+  useShallow(store => ({
     customer: store[sessionId]?.["customer"],
-  }),
-  shallow
+  }))
 );

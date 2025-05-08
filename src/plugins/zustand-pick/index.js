@@ -62,13 +62,14 @@ module.exports = function ({ types }) {
         declarator.init = types.callExpression(
           types.identifier(declarator.init.callee.object.name),
           [
-            types.arrowFunctionExpression(
-              [types.identifier("store")],
-              types.objectExpression(
-                declarator.id.properties.map(toObjectProperty)
-              )
-            ),
-            types.identifier("shallow"),
+            types.callExpression(types.identifier("useShallow"), [
+              types.arrowFunctionExpression(
+                [types.identifier("store")],
+                types.objectExpression(
+                  declarator.id.properties.map(toObjectProperty)
+                )
+              ),
+            ]),
           ]
         );
 
@@ -76,7 +77,7 @@ module.exports = function ({ types }) {
           path: astPath,
           types,
           source: "zustand/shallow",
-          importName: "shallow",
+          importName: "useShallow",
         });
       },
       CallExpression(astPath) {
