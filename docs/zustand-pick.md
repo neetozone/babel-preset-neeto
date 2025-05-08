@@ -6,14 +6,13 @@ When we wanted to pick some properties from a zustand store, this is what we
 need to do:
 
 ```js
-import { shallow } from "zustand/shallow";
+import { useShallow } from "zustand/shallow";
 
 const { order, customer } = useGlobalStore(
-  store => ({
+  useShallow(store => ({
     order: store[sessionId]?.globals.order,
     customer: store[sessionId]?.globals.customer,
-  }),
-  shallow
+  }))
 );
 ```
 
@@ -30,14 +29,14 @@ const { order, customer } = useGlobalStore.pick([sessionId, "globals"]);
 ```
 
 You might also notice that we don't have the
-`import { shallow } from "zustand/shallow"` statement in this piece of code. We
-don't need that. The plugin will automatically add it for us at the time of
+`import { useShallow } from "zustand/shallow"` statement in this piece of code.
+We don't need that. The plugin will automatically add it for us at the time of
 transpiling.
 
 The plugin detects that `order` and `customer` properties are to be fetched from
 the `store[sessionId].globals` property from `useGlobalStore` and it generates
 code for it. Note that the plugin will automatically add
-`import { shallow } from "zustand/shallow"` for us. We don't need to add it
+`import { useShallow } from "zustand/shallow"` for us. We don't need to add it
 ourselves.
 
 ## Allowed syntaxes
@@ -170,13 +169,12 @@ const { order, customer } = useGlobalStore.pick([sessionId, "globals"]);
 Will be transformed to:
 
 ```js
-import { shallow } from "zustand/shallow";
+import { useShallow } from "zustand/shallow";
 const { order, customer } = useGlobalStore(
-  store => ({
+  useShallow(store => ({
     order: store[sessionId]?.["globals"]?.["order"],
     customer: store[sessionId]?.["globals"]?.["customer"],
-  }),
-  shallow
+  }))
 );
 ```
 
