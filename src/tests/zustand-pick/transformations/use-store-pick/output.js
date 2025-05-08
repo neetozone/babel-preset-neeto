@@ -1,8 +1,7 @@
-import { shallow } from "zustand/shallow";
+import { useShallow } from "zustand/shallow";
 const { order, customer } = useStore(
-  store => ({
+  useShallow(store => ({
     order: store["order"],
     customer: store["customer"],
-  }),
-  shallow
+  }))
 );
