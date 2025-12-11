@@ -1,7 +1,7 @@
 version: v1.0
 fail_fast: true
 is_cypress: false
-plan: professional-1
+plan: standard-2
 
 triggers:
   - event: branch
@@ -11,6 +11,4 @@ commands:
   - checkout
   - neetoci-version node 22.13
   - neetoci-version ruby 3.3.5
-  - corepack enable
-  - yarn set version 4.9.2
   - bash ./.scripts/bump_version.sh
