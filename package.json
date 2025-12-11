@@ -3,6 +3,10 @@
   "version": "1.0.13",
   "description": "A babel preset to transform short code to boilerplate at compile time",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "src/plugins/**/*"
+  ],
   "scripts": {
     "test": "jest",
     "prepare": "husky install"
