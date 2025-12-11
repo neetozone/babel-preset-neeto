@@ -20,9 +20,11 @@ bump_package() {
   echo "== Bump the NPM package version =="
   yarn install
   handle_error "yarn install"
-  yarn version "$VERSION_LABEL"
-  yarn npm publish --access public
-  handle_error "yarn npm publish"
+  yarn config set version-tag-prefix "v"
+  yarn version --"$VERSION_LABEL" --no-git-tag-version
+  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >~/.npmrc
+  yarn publish --non-interactive
+  handle_error "yarn publish"
 }
 
 raise_pr() {
